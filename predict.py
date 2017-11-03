@@ -42,7 +42,7 @@ def predict_df(df, vocab):
     gc.collect()
 
     print('Predict df')
-    return [p.answer for p in model.batch_size(MODEL_BATCH_SIZE).predicts(X, y)]
+    return [p.answer.text for p in model.batch_size(MODEL_BATCH_SIZE).predicts(X, y)]
 
 if __name__ == '__main__':
     DATA_FILE = os.environ.get('INPUT', 'data/train.csv')
