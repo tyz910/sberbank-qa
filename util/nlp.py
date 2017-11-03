@@ -1,11 +1,11 @@
 import os
 import re
+import collections
+import pymorphy2
+import pandas as pd
 from nltk.stem import SnowballStemmer
 from nltk.tokenize import word_tokenize
 from nltk.tokenize.util import align_tokens
-import pymorphy2
-import pandas as pd
-import collections
 from tqdm import *
 
 
@@ -295,6 +295,9 @@ class ParagraphQuestion(object):
             self.answer = self.answer.strip(' .?')
 
             matches = [m.start() for m in re.finditer(re.escape(self.answer.lower()), self.paragraph.text.lower())]
+            if len(matches) == 0:
+                print([self.answer.lower(), self.paragraph.text.lower()])
+
             self.answer_start = matches[answer_pos]
             self.answer_end = self.answer_start + len(self.answer)
             self.answer_start_span, self.answer_end_span = self.paragraph.find_answer_span(self.answer_start, self.answer_end)
