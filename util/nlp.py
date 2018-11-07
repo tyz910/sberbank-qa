@@ -105,6 +105,9 @@ class Vocab(object):
     def __find_embedding(self, lemma, pos):
         if self.wv is None:
             wv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'wv_' + str(self.embedding_size) + '.pickle'))
+            if not os.path.isfile(wv_path):
+                wv_path = "/data/wv_" + str(self.embedding_size) + '.pickle'  # from docker
+
             self.wv = pd.read_pickle(wv_path)
 
         if pos in Vocab.GRAMMAR_MAP:

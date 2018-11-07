@@ -1,10 +1,12 @@
+import csv
+import random
 import pickle
 from util.model import QaPredictLiveModel
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
-APP_HOST = '127.0.0.1'
+APP_HOST = '0.0.0.0'
 APP_PORT = 8000
-app = Flask(__name__)
+app = Flask(__name__, template_folder="assets/templates", static_folder="assets/static")
 
 with open('model/vocab.pickle', 'rb') as f:
     vocab = pickle.load(f)
@@ -22,6 +24,11 @@ model = QaPredictLiveModel({
 }, vocab, weights)
 
 
+@app.route('/')
+def hello_world():
+    return render_template('index.html')
+
+
 @app.route('/predict', methods=['POST'])
 def predict_handler():
     data = request.get_json()
@@ -30,10 +37,20 @@ def predict_handler():
     return jsonify({'answer': predict.answer.text})
 
 
+@app.route('/random')
+def random_handler():
+    line = random.choice(open("data/train.csv").readlines())
+    parts = list(csv.reader([line]))[0]
+    return jsonify({
+        "paragraph": parts[2],
+        "question": parts[3],
+    })
+
+
 @app.route('/health')
 def health_handler():
     return jsonify({'ok': True})
 
 
 if __name__ == '__main__':
-    app.run(host=APP_HOST, port=APP_PORT)
+    app.run(host=APP_HOST, port=APP_PORT, debug=True)

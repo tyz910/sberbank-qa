@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sberbank Data Science Journey 2017</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" >
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <form id="qa">
+                <h3>Sberbank Data Science Journey 2017</h3>
+                <h4>Задача B. Построение вопрос-ответной системы.</h4>
+
+                <fieldset>
+                    <textarea id="paragraph" placeholder="Введите параграф текста...." required>Первые упоминания о строении человеческого тела встречаются в Древнем Египте. В XXVII веке до н. э. египетский врач Имхотеп описал некоторые органы и их функции, в частности головной мозг, деятельность сердца, распространение крови по сосудам. В древнекитайской книге Нейцзин (XI—VII вв. до н. э.) упоминаются сердце, печень, лёгкие и другие органы тела человека. В индийской книге Аюрведа ( Знание жизни , IX-III вв. до н. э.) содержится большой объём анатомических данных о мышцах, нервах, типах телосложения и темперамента, головном и спинном мозге.</textarea>
+                </fieldset>
+
+                <fieldset>
+                    <input id="question" placeholder="Введите вопрос...." type="text" required autofocus value="Где встречаются первые упоминания о строении человеческого тела?">
+                </fieldset>
+
+                <fieldset>
+                    <button name="submit" type="submit" id="send">Задать вопрос</button>
+                </fieldset>
+
+                <p id="answer">....</p>
+
+                <p class="copyright"><span id="rnd">Случайный параграф</span></p>
+            </form>
+        </div>
+    </body>
+</html>
