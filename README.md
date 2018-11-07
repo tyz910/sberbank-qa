@@ -13,3 +13,5 @@
 ## Запуск в Docker
 1. Выполнить `make run`.
 2. Открыть в браузере [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+![](https://github.com/tyz910/sberbank-qa/raw/master/assets/gui.png)
